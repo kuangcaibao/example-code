@@ -1,3 +1,6 @@
+var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 var config = {
 	// context: __dirname, // 工作路径, default: process.cwd()
 	entry: {
@@ -19,9 +22,13 @@ var config = {
 			}
 		}, {
 			test: /.css$/,
-			loader: "style!css"
+			// loader: "style!css",
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader")
 		}]
-	}
+	},
+	plugins: [
+		new ExtractTextPlugin("styles.css"),
+	]
 }
 
 module.exports = config;
