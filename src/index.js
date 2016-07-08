@@ -1,1 +1,1 @@
-alert("hello origin");
+console.log("hello origin");
