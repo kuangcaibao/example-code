@@ -1,26 +1,34 @@
-var webpack = require('webpack')
-var webpackDevMiddleware = require('webpack-dev-middleware')
-var webpackHotMiddleware = require('webpack-hot-middleware')
-var config = require('./webpack.config.js')
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var morgan = require("morgan");
+var bodyParser = require("body-parser");
+var express = require("express");
+var stormpath = require("express-stormpath");
+var path = require("path");
 
-var express = require("express")
-var app = new express()
-var port = 3000
+var config = require('./webpack.config');
+var stormOpt = require("./stormpath.config");
 
-var compiler = webpack(config)
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
-app.use(webpackHotMiddleware(compiler))
+var app = new express();
+var port = 3000;
+var compiler = webpack(config);
 
-// 将example指向浏览器的根目录
-app.use("/", express.static("example"))
+app.use(morgan("combined"));
+app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+app.use(stormpath.init(app, stormOpt));
 
-// 这里将node_modules添加到静态路径，可以获取第3方包的min文件
-app.use("/node_modules", express.static("node_modules"))
+app.get("*", function(req, res) {
+	res.sendFile(path.join(__dirname, "example/index.html"));
+})
 
-app.listen(port, function(error) {
-  if (error) {
-    console.error(error)
-  } else {
-    console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port)
-  }
+app.on("stormpath.ready", function() {
+	console.log("stormpath ready");
+
+	app.listen(port, function(error) {
+	  if (error) {
+	    console.error(error);
+	  } else {
+	    console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port);
+	  }
+	})
 })
