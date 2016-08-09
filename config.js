@@ -7,8 +7,7 @@ module.exports = {
 	redis: {
 		port: 6379,
 		host: "192.168.0.53",
-		db: "test",
-		pass: "123456"
+		ttl: 30
 	},
 
 	// session
