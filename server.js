@@ -8,6 +8,9 @@ var redis = require("redis");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
+var _ = require("lodash");
+// var Loader = require("Loader");
+var path = require("path");
 
 var midSession = require("./middleware").midSession;
 
@@ -18,12 +21,23 @@ var client = redis.createClient();
 
 var router = require("./routes");
 
+// 静态文件路径
+app.use("/static", express.static("public"));
+
+// 模板引擎
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "html");
+app.engine("html", require("ejs-mate"));
+app.locals._layoutFile = "layout.html";
+_.extend(app.locals, {
+	config: config,
+	// Loader: Loader
+})
+
 // 
 var compiler = webpack(webpackConfig);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
-
-// app.use("/", express.static("example"));
 
 app.use(session({
 	store: new redisStore(Object.assign({}, config.redis, {client: client})),

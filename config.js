@@ -1,4 +1,6 @@
 module.exports = {
+
+	description: "test app",
 	
 	// 监听端口
 	port: 3000,
@@ -7,7 +9,7 @@ module.exports = {
 	redis: {
 		port: 6379,
 		host: "192.168.0.53",
-		ttl: 30
+		ttl: 30 * 60
 	},
 
 	// session
