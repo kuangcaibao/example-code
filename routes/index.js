@@ -1,18 +1,14 @@
 var express = require("express");
-var path = require("path");
 var router = express.Router();
 
-// router.get("/", function(req, res) {
-// 	if(!req.session.times) {
-// 		req.session.times = 0;
-// 	}
+// 中间件
+var { auth } = require("../middleware");
 
-// 	req.session.times ++;
-// 	res.send("visited " + req.session.times + " times.");
-// })
+// controller
+var sign = require("../controller/sign");
 
-router.get("/", function(req, res) {
-	res.render("index", { title: "kuangcaibao"});
-})
+router.get("/login", sign.showLogin);
+
+router.post("/login", sign.login);
 
 module.exports = router;

@@ -12,8 +12,6 @@ var _ = require("lodash");
 // var Loader = require("Loader");
 var path = require("path");
 
-var midSession = require("./middleware").midSession;
-
 var app = new express();
 var webpackConfig = require('./webpack.config.js');
 var config = require("./config");
@@ -49,8 +47,7 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(midSession);
-
+// 路由设置
 app.use("/", router);
 
 app.listen(config.port, function(error) {

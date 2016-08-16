@@ -13,9 +13,9 @@
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
 
-    	<% if(current_user) { %>
+    	<% if( typeof user != "undefined" && user ) { %>
     		<ul class="nav navbar-nav navbar-right">
-	 	   		<li><a href="/user/<%= current_user.name %>"><%= current_user.name %></a></li>
+	 	   		<li><a href="/user/<%= user.name %>"><%= user.name %></a></li>
 		    </ul>
 
     	<% } else { %>
