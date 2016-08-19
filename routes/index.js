@@ -6,9 +6,12 @@ var { auth } = require("../middleware");
 
 // controller
 var sign = require("../controller/sign");
+var site = require("../controller/site");
 
 router.get("/login", sign.showLogin);
 
 router.post("/login", sign.login);
+
+router.get("/", auth, site.index);
 
 module.exports = router;

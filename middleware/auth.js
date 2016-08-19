@@ -4,8 +4,6 @@ module.exports = function(req, res, next) {
 		res.redirect("/nomatch");
 	}
 
-	res.locals.user = null;
-
 	// 用户未登录
 	if(!req.session.user) {
 		// console.log("1");

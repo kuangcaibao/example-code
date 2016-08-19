@@ -1,6 +1,3 @@
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
 var express = require("express");
 var session = require("express-session");
 var redisStore = require("connect-redis")(session);
@@ -8,12 +5,15 @@ var redis = require("redis");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
+var multer = require("multer");
+var upload = multer();
 var _ = require("lodash");
-// var Loader = require("Loader");
 var path = require("path");
 
+// mongoose
+require("./models");
+
 var app = new express();
-var webpackConfig = require('./webpack.config.js');
 var config = require("./config");
 var client = redis.createClient();
 
@@ -32,11 +32,6 @@ _.extend(app.locals, {
 	// Loader: Loader
 })
 
-// 
-var compiler = webpack(webpackConfig);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
-app.use(webpackHotMiddleware(compiler));
-
 app.use(session({
 	store: new redisStore(Object.assign({}, config.redis, {client: client})),
 	secret: config.session.secret
@@ -46,6 +41,7 @@ app.use(session({
 // app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // 路由设置
 app.use("/", router);

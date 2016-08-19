@@ -7,9 +7,15 @@ module.exports = {
 
 	// redis
 	redis: {
-		port: 6379,
 		host: "192.168.0.53",
+		port: 6379,
 		ttl: 30 * 60
+	},
+
+	mongdb: {
+		host: "192.168.0.53",
+		port: 27017,
+		db: "test"
 	},
 
 	// session
