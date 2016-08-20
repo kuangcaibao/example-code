@@ -1,2 +1,4 @@
 require("./conndb");
-require("./user");
+var User = require("./user");
+
+exports.User = User;
