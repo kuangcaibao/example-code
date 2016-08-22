@@ -8,10 +8,12 @@ var { auth } = require("../middleware");
 var sign = require("../controller/sign");
 var site = require("../controller/site");
 
-router.get("/login", sign.showLogin);
+router.get("/", auth, site.index);
 
+router.get("/login", sign.showLogin);
 router.post("/login", sign.login);
 
-router.get("/", auth, site.index);
+router.get("/signup", sign.showSignup);
+router.post("/signup", sign.signup);
 
 module.exports = router;

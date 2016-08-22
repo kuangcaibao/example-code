@@ -7,13 +7,13 @@ module.exports = {
 
 	// redis
 	redis: {
-		host: "192.168.0.53",
+		host: "127.0.0.1",
 		port: 6379,
 		ttl: 30 * 60
 	},
 
 	mongdb: {
-		host: "192.168.0.53",
+		host: "127.0.0.1",
 		port: 27017,
 		db: "test"
 	},

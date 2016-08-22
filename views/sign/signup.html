@@ -1,4 +1,4 @@
-<form class="form-horizontal login-form" action="/login" method="post">
+<form class="form-horizontal login-form" action="/signup" method="post">
 
 	<% if(typeof error !== "undefined" && error ) { %>
 		<div class="alert alert-warning">
@@ -23,14 +23,14 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-10 col-sm-2">
-			<button type="submit" class="btn btn-default" onclick="return login();">登录</button>	
+			<button type="submit" class="btn btn-default" onclick="return signup();">注册</button>	
 		</div>
 	</div>
 
 </form>
 
 <div class="col-sm-offset-11 col-sm-1">
-	<a href="/signup">去注册</a>
+	<a href="/login">去登录</a>
 </div>
 
-<script type="text/javascript" src="/static/js/sign/login.js"></script>
+<script type="text/javascript" src="/static/js/sign/signup.js"></script>
