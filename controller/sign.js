@@ -2,6 +2,7 @@ var eventproxy = require("eventproxy");
 var User = require("../proxy/user");
 
 exports.showLogin = function(req, res) {
+	console.log(req.session);
 	res.render("sign/login", { title: "登录" } );
 }
 
@@ -58,7 +59,7 @@ exports.signup = function(req, res, next) {
 			return ep.emit("sign_error");
 		}	
 
-		User.saveUser({name: name, pwd: pwd}, function(err, user) {
+		User.saveUser({name: name, pwd: pwd, signtime: new Date() }, function(err, user) {
 			if(err) {
 				return next(err);
 			}
@@ -66,4 +67,9 @@ exports.signup = function(req, res, next) {
 			res.redirect("/login");
 		})
 	})
+}
+
+exports.loginout = function(req, res, next) {
+	req.session.destroy();
+	res.redirect("/");
 }

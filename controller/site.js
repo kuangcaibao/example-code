@@ -1,5 +1,6 @@
 exports.index = function(req, res) {
 	
-	var name = req.session.name;
-	res.send("hello " + name);
+	res.render("index", { title: "首页", user: req.session });
+	// res.send("hello " + name);
+
 }

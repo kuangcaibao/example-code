@@ -18,6 +18,8 @@ var config = require("./config");
 var client = redis.createClient();
 
 var router = require("./routes");
+var api = require("./routes/api");
+var auth = require("./middleware/auth");
 
 // 静态文件路径
 app.use("/static", express.static("public"));
@@ -45,6 +47,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // 路由设置
 app.use("/", router);
+app.use("/api", auth,  api);
 
 app.listen(config.port, function(error) {
   if (error) {

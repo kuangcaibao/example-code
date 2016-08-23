@@ -16,6 +16,7 @@
     	<% if( typeof user != "undefined" && user ) { %>
     		<ul class="nav navbar-nav navbar-right">
 	 	   		<li><a href="/user/<%= user.name %>"><%= user.name %></a></li>
+          <li><a href="/loginout">退出</a></li>
 		    </ul>
 
     	<% } else { %>

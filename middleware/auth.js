@@ -5,8 +5,7 @@ module.exports = function(req, res, next) {
 	}
 
 	// 用户未登录
-	if(!req.session.user) {
-		// console.log("1");
+	if(!req.session.name) {
 		res.redirect("/login");
 	}
 

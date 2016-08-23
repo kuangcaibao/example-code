@@ -1,8 +1,6 @@
 var mongoose = require("mongoose");
 var { mongdb } = require("../config");
 
-console.log(1);
-
 mongoose.connect(`mongodb://${mongdb.host}:${mongdb.port}/${mongdb.db}`);
 var db = mongoose.connection;
 

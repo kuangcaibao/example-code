@@ -16,4 +16,7 @@ router.post("/login", sign.login);
 router.get("/signup", sign.showSignup);
 router.post("/signup", sign.signup);
 
+router.get("/loginout", sign.loginout);
+router.post("/loginout", sign.loginout);
+
 module.exports = router;
