@@ -10,6 +10,10 @@
 
 这里存放所有的分支说明。
 
-## online-todo
+## login-test
 
-网络版的 `todolist`
+基于 redis, mongodb, session 的 nodejs 版用户登录，注册
+
+## stormpath-test
+
+stormpath ，第三方用户验证测试
