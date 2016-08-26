@@ -2,6 +2,7 @@ var webpack = require('webpack')
 var webpackDevMiddleware = require('webpack-dev-middleware')
 var webpackHotMiddleware = require('webpack-hot-middleware')
 var config = require('./webpack.config.js')
+var path = require("path");
 
 var express = require("express")
 var app = new express()
@@ -16,6 +17,10 @@ app.use("/", express.static("example"))
 
 // 这里将node_modules添加到静态路径，可以获取第3方包的min文件
 app.use("/node_modules", express.static("node_modules"))
+
+app.get("*", function(req, res) {
+	res.sendFile(path.resolve("example/index.html"));
+})
 
 app.listen(port, function(error) {
   if (error) {

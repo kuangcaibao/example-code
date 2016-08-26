@@ -6,7 +6,7 @@ var config = {
 
 	fetch: {
 		credentials: 'include',   	// 发送请求带cookie
-		mode: 'no-cors'				// 跨域请求
+		// mode: 'no-cors'				// 跨域请求
 	}
 };
 

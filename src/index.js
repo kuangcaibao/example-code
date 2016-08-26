@@ -1,13 +1,14 @@
-import tdxFetch from "./common/req";
+import React from "react";
+import { render } from "react-dom";
+import { Router, browserHistory } from "react-router"
 
-import "./test.css"
+import "./css";
 
-// tdxFetch("/api/list", {
-// 	method: "post"
-// }).then(response => response.json())
-// 	.then( response => console.log(response) )
+import Routes from "./route";
 
-fetch("http://127.0.0.1:3000/api/list", { method: "post", mode: "no-cors"})
-.then( response => response.json())
-.then( list => console.log(list))
-.catch( err => console.log(err));
+console.log(Routes);
+
+render(
+	<Router history={browserHistory} routes={Routes} />,
+	document.getElementById("app")
+);
