@@ -1,9 +1,69 @@
 import React, { Component } from "react";
+import { Link, Router, browserHistory } from "react-router";
+
+import User from "../controller/auth";
+import tdxFetch from "../common/req";
 
 export default class Nav extends Component {
 
+	constructor(props, context) {
+		super(props, context);
+		this.logoutClick = this.logoutClick.bind(this);
+		this.state = {
+			loginStatus: User.getLoginStatus()
+		}
+	}
+
+	logoutClick(e) {
+
+		e.preventDefault();
+		tdxFetch("/api/logout")
+		.then(res => res.json())
+		.then( res =>  {
+			if(res.ErrorCode == 0) {
+				User.setLoginStatus(false);
+				this.setState({
+					loginStatus: User.getLoginStatus()
+				});
+			} else {
+				alert(res.ErrorInfo);
+			}
+		})
+		.catch( err => {
+			alert(err);
+		});
+	}
+
+	componentDidMount() {
+
+		if(!this.state.loginStatus) {
+			browserHistory.push("/login");
+		}
+	}
 
 	render() {
+		var rightArea = "";
+		if(User.getLoginStatus()) {
+			rightArea = (
+				<ul className="nav navbar-nav navbar-right">
+					<li className="dropdown">
+			          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
+			          <ul className="dropdown-menu">
+			            <li><Link to="#">个人信息</Link></li>
+			            <li onClick={this.logoutClick}>退出</li>
+			          </ul>
+			        </li>
+		        </ul>
+			);
+		} else {
+			rightArea = (
+				<ul className="nav navbar-nav navbar-right">
+					<li><Link to="/signup">注册</Link></li>
+				    <li><Link to="/login">登录</Link></li>
+				</ul>
+			);
+		}
+
 
 		return (
 
@@ -16,24 +76,11 @@ export default class Nav extends Component {
 			        <span className="icon-bar"></span>
 			        <span className="icon-bar"></span>
 			      </button>
-			      <a className="navbar-brand" href="/">TDX</a>
+			      <Link className="navbar-brand" to="/">TDX</Link>
 			    </div>
 
 			    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			      <ul className="nav navbar-nav navbar-right">
-			        <li><a href="/signup">注册</a></li>
-			        <li><a href="/login">登录</a></li>
-			        <li className="dropdown">
-			          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
-			          <ul className="dropdown-menu">
-			            <li><a href="#">Action</a></li>
-			            <li><a href="#">Another action</a></li>
-			            <li><a href="#">Something else here</a></li>
-			            <li role="separator" className="divider"></li>
-			            <li><a href="#">Separated link</a></li>
-			          </ul>
-			        </li>
-			      </ul>
+			      {rightArea}
 			    </div>
 			  </div>
 			</nav>

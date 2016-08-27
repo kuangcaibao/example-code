@@ -1,0 +1,18 @@
+.tdx-panel {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+
+.tdx-panel-head {
+	height: 40px;
+	line-height: 40px;
+	background-color: #F6F6F6;
+	color: #80BD01;
+	font-size: 15px;
+	padding-left: 15px;
+}
+
+.tdx-panel-body {
+	padding: 30px;
+}
