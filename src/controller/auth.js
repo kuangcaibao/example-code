@@ -1,10 +1,12 @@
 import tdxFetch from "../common/req";
 
-
-// 这里负责用户的校验，注册
-var User = {
-	isLogin: false
-};
+var User = JSON.parse(localStorage.getItem("User"));
+if(User === null) {
+	User = {};
+	User.isLogin = false;
+} else {
+	User.isLogin = true;
+}
 
 // 取服务器获取用户信息
 var getInfoFromServer = function() {
@@ -32,9 +34,14 @@ var setLoginStatus = function(status) {
 	User.isLogin = status;
 }
 
+var getUserInfo = function() {
+	return User;
+}
+
 getInfoFromServer();
 
 export default {
 	getLoginStatus,
-	setLoginStatus
+	setLoginStatus,
+	getUserInfo
 }

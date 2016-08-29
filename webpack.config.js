@@ -17,10 +17,7 @@ var config = {
 		loaders: [{
 			test: /.js$/,
 			loader: "babel",
-			exclude: /node_modules/,
-			query: {
-				presets: ["es2015", "react"]
-			}
+			exclude: /node_modules/
 		}, {
 			test: /.css$/,
 			exclude: /css/,
@@ -33,7 +30,7 @@ var config = {
 		}]
 	},
 	plugins: [
-		new ExtractTextPlugin("styles.css"),
+		new ExtractTextPlugin("styles.css")
 	]
 }
 

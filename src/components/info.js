@@ -1,0 +1,1 @@
+exports.INFO_LOGIN_ERROR = "请输入正确的用户名或密码";

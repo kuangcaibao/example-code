@@ -47,10 +47,13 @@ export default class Nav extends Component {
 			rightArea = (
 				<ul className="nav navbar-nav navbar-right">
 					<li className="dropdown">
-			          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
+			          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			          	{User.getUserInfo().name} 
+			          	<span className="caret"></span>
+			          </a>
 			          <ul className="dropdown-menu">
 			            <li><Link to="#">个人信息</Link></li>
-			            <li onClick={this.logoutClick}>退出</li>
+			            <li><Link to="#" onClick={this.logoutClick}>退出</Link></li>
 			          </ul>
 			        </li>
 		        </ul>
